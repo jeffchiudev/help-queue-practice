@@ -1,6 +1,7 @@
 import React from 'react';
 import NewTicketForm from './NewTicketForm';
 import TicketList from './TicketList';
+import TicketDetail from './TIcketDetail';
 
 class TicketControl extends React.Component {
   
@@ -18,6 +19,14 @@ class TicketControl extends React.Component {
     this.setState({
       masterTicketList: newMasterTicketList,
       formVisibleOnPage: false
+    });
+  }
+
+  handleDeletingTicket = (id) => {
+    const newMasterTicketList = this.state.masterTicketList.filter(ticket => ticket.id !== id);
+    this.setState({
+      masterTicketList: newMasterTicketList,
+      selectedTicket: null
     });
   }
 
@@ -44,7 +53,7 @@ class TicketControl extends React.Component {
     let buttonText = null;
 
     if (this.state.selectedTicket != null) {
-      currentlyVisibleState = <TicketDetail ticket = {this.state.selectedTicket} />
+      currentlyVisibleState = <TicketDetail ticket = {this.state.selectedTicket} onClickingDelete = {this.handleDeletingTicket}/>
       buttonText = "Return to Ticket List";
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList}/>; 
