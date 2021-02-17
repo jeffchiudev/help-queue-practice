@@ -19,21 +19,6 @@ class TicketControl extends React.Component {
     };
   }
 
-  handleAddingNewTicketToList = (newTicket) => {
-    const { dispatch } = this.props;
-    const action = a.addTicket(newTicket);
-    dispatch(action);
-    const action2 = a.toggleForm();
-    dispatch(action2);
-  }
-
-  handleDeletingTicket = (id) => {
-    const { dispatch } = this.props;
-    const action = a.deleteTicket(id);
-    dispatch(action);
-    this.setState({selectedTicket: null});
-  }
-
   handleClick = () => {
     if (this.state.selectedTicket != null) {
       this.setState({
@@ -46,15 +31,13 @@ class TicketControl extends React.Component {
       dispatch(action);
     }
   }
-
-  handleEditClick = () => {
-    console.log("handleEditClick reached!");
-    this.setState({editing: true});
-  }
-
-  handleChangingSelectedTicket = (id) => {
-    const selectedTicket = this.props.masterTicketList[id];
-    this.setState({selectedTicket: selectedTicket});
+  
+  handleAddingNewTicketToList = (newTicket) => {
+    const { dispatch } = this.props;
+    const action = a.addTicket(newTicket);
+    dispatch(action);
+    const action2 = a.toggleForm();
+    dispatch(action2);
   }
 
   handleEditingTicketInList = (ticketToEdit) => {
@@ -65,6 +48,24 @@ class TicketControl extends React.Component {
       editing: false,
       selectedTicket: null
     });
+  }
+
+  handleDeletingTicket = (id) => {
+    const { dispatch } = this.props;
+    const action = a.deleteTicket(id);
+    dispatch(action);
+    this.setState({selectedTicket: null});
+  }
+
+
+  handleEditClick = () => {
+    console.log("handleEditClick reached!");
+    this.setState({editing: true});
+  }
+
+  handleChangingSelectedTicket = (id) => {
+    const selectedTicket = this.props.masterTicketList[id];
+    this.setState({selectedTicket: selectedTicket});
   }
 
   render(){
