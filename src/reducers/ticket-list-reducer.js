@@ -9,7 +9,9 @@ export default (state = {}, action) => {
         names: names,
         location: location,
         issue: issue,
-        id: id
+        id: id,
+        timeOpen,
+        formattedWaitTime,
       }
     });
   case c.DELETE_TICKET:
