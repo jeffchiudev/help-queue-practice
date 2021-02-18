@@ -2,6 +2,7 @@ import ticketListReducer from '../../reducers/ticket-list-reducer';
 
 describe ('ticketListReducer', () => {
 
+  let action;
   const currentState = {
     1: {names: 'Ryan & Aimen',
     location: '4b',
@@ -13,12 +14,12 @@ describe ('ticketListReducer', () => {
     id: 2 }
   }
 
-  let action;
   const ticketData = {
     name: "Ryan & Aimen",
     location: '4b',
     issue: 'Redux action is not working correctly.',
-    id: 1
+    timeOpen: 0,
+    id: 1,
   };
   test ('Should return default state if there is no action type passed into the reducer', () => {
     expect(ticketListReducer({}, { type: null })).toEqual({});
@@ -54,6 +55,25 @@ describe ('ticketListReducer', () => {
         location: '2a',
         issue: 'Reducer has side effects.',
         id: 2 }
+    });
+  });
+
+  test('Should add a formatted wait time to ticket entry', () => {
+    const {names, location, issue, timeOpen, id } = ticketData;
+    action = {
+      type: console.UPDATE_TIME,
+      formattedWaitTime: '4 minutes',
+      id: id,
+    };
+    expect(ticketListReducer({ [id] : ticketData }, action)).toEqual({
+      [id]: {
+        names,
+        location,
+        issue,
+        timeOpen,
+        id,
+        formattedWaitTime: '4 minuts'
+      }
     });
   });
 })
