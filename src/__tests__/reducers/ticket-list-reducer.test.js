@@ -15,7 +15,7 @@ describe ('ticketListReducer', () => {
   }
 
   const ticketData = {
-    name: "Ryan & Aimen",
+    names: 'Ryan & Aimen',
     location: '4b',
     issue: 'Redux action is not working correctly.',
     timeOpen: 0,
@@ -61,7 +61,7 @@ describe ('ticketListReducer', () => {
   test('Should add a formatted wait time to ticket entry', () => {
     const {names, location, issue, timeOpen, id } = ticketData;
     action = {
-      type: console.UPDATE_TIME,
+      type: 'UPDATE_TIME',
       formattedWaitTime: '4 minutes',
       id: id,
     };
@@ -72,7 +72,7 @@ describe ('ticketListReducer', () => {
         issue,
         timeOpen,
         id,
-        formattedWaitTime: '4 minuts'
+        formattedWaitTime: '4 minutes'
       }
     });
   });
